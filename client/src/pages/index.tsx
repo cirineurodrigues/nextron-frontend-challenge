@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
-import { apiNextURl } from '@constants/api';
-import { createCookie } from '@utils/utils';
 import { useRouter } from 'next/router';
+
+import { apiNextURl } from '@constants/api';
+import { createCookie } from '@shared/utils/cookiesUtils';
 
 export default function Login() {
   const router = useRouter();

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
-import { apiNextURl } from '@constants/api';
 import { useRouter } from 'next/router';
+
+import { apiNextURl } from '@constants/api';
 
 export default function Register() {
   const router = useRouter();

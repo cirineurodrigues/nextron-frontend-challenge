@@ -63,6 +63,8 @@
         "newlinesBetween": "always",
         "groups": [
           ["/^react/"],
+          ["/^next/"],
+          ["/^@mui/"],
           ["module"],
           ["/^~//"],
           ["parent", "sibling", "index"]

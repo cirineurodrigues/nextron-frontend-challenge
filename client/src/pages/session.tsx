@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-import { apiNextURl } from '@constants/api';
-import { deleteCookie } from '@utils/utils';
 import { useRouter } from 'next/router';
+
+import { apiNextURl } from '@constants/api';
+import { deleteCookie } from '@shared/utils/cookiesUtils';
 
 export default function Session() {
   const router = useRouter();

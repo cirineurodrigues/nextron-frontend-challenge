@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import Head from 'next/head';
 
-import { apiNextURl } from '@constants/api';
-import { createCookie } from '@utils/utils';
-import { useRouter } from 'next/router';
+import Login from '@features/login/pages/Login';
 
-export default function Login() {
-  const router = useRouter();
+export default function LoginPage() {
+  /* const router = useRouter();
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -53,37 +51,14 @@ export default function Login() {
     } catch (e: any) {
       setState({ ...state, message: e.toString(), isSubmitting: false });
     }
-  };
+  }; */
 
   return (
-    <div className="wrapper">
-      <h1>Login</h1>
-      <input
-        className="input"
-        type="text"
-        placeholder="email"
-        value={email}
-        name="email"
-        onChange={(e) => {
-          handleChange(e);
-        }}
-      />
-
-      <input
-        className="input"
-        type="password"
-        placeholder="password"
-        value={password}
-        name="password"
-        onChange={(e) => {
-          handleChange(e);
-        }}
-      />
-
-      <button disabled={isSubmitting} onClick={() => handleSubmit()}>
-        {isSubmitting ? '.....' : 'login'}
-      </button>
-      <div className="message">{message}</div>
-    </div>
+    <>
+      <Head>
+        <title>Login - Nextron Energia</title>
+      </Head>
+      <Login />
+    </>
   );
 }

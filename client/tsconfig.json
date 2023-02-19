@@ -16,11 +16,14 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@components/*": ["src/shared/components/*"],
       "@constants/*": ["src/shared/constants/*"],
-      "@features/*": ["src/features/*"] ,
+      "@features/*": ["src/features/*"],
+      "@login/*": ["src/features/login/*"],
+      "@providers/*": ["src/shared/providers/*"],
       "@shared/*": ["src/shared/*"],
-      "@utils/*": ["src/shared/utils/*"],
-    },
+      "@utils/*": ["src/shared/utils/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
