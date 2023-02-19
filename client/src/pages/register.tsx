@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+
+import { apiNextURl } from '@constants/api';
 import { useRouter } from 'next/router';
-import { apiNextURl } from '../api'
 
 export default function Register() {
   const router = useRouter();
@@ -11,18 +12,18 @@ export default function Register() {
     isSubmitting: false,
     message: '',
     errors: null,
-  })
+  });
 
-  const { email, password, name, message, isSubmitting, errors } = state
+  const { email, password, name, message, isSubmitting, errors } = state;
 
   const handleChange = async (e: any) => {
-    await setState({ ...state, [e.target.name]: e.target.value })
-  }
+    await setState({ ...state, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async () => {
-    setState({ ...state, isSubmitting: true })
+    setState({ ...state, isSubmitting: true });
 
-    const { email, password, name } = state
+    const { email, password, name } = state;
     try {
       const res = await fetch(`${apiNextURl}/register`, {
         method: 'POST',
@@ -32,18 +33,23 @@ export default function Register() {
           name,
         }),
         headers: { 'Content-Type': 'application/json' },
-      }).then(res => res.json())
-      const { success, msg, errors } = res
+      }).then((res) => res.json());
+      const { success, msg, errors } = res;
 
       if (!success) {
-        return setState({ ...state, message: msg, errors, isSubmitting: false })
+        return setState({
+          ...state,
+          message: msg,
+          errors,
+          isSubmitting: false,
+        });
       }
 
-      router.push('/login')
+      router.push('/login');
     } catch (e: any) {
-      setState({ ...state, message: e.toString(), isSubmitting: false })
+      setState({ ...state, message: e.toString(), isSubmitting: false });
     }
-  }
+  };
 
   return (
     <div className="wrapper">
@@ -54,8 +60,8 @@ export default function Register() {
         placeholder="Name"
         value={name}
         name="name"
-        onChange={e => {
-          handleChange(e)
+        onChange={(e) => {
+          handleChange(e);
         }}
       />
       <input
@@ -64,8 +70,8 @@ export default function Register() {
         placeholder="Email"
         value={email}
         name="email"
-        onChange={e => {
-          handleChange(e)
+        onChange={(e) => {
+          handleChange(e);
         }}
       />
       <input
@@ -74,8 +80,8 @@ export default function Register() {
         placeholder="Password"
         value={password}
         name="password"
-        onChange={e => {
-          handleChange(e)
+        onChange={(e) => {
+          handleChange(e);
         }}
       />
 
@@ -86,9 +92,9 @@ export default function Register() {
       <div>
         {errors &&
           errors.map((error: any, id: string) => {
-            return <p key={id}> &bull; {error}</p>
+            return <p key={id}> &bull; {error}</p>;
           })}
       </div>
     </div>
-  )
+  );
 }

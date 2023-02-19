@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { useRouter } from 'next/router'
-import { apiNextURl } from '../api'
-import { createCookie } from '../utils'
+import React, { useState } from 'react';
+
+import { apiNextURl } from '@constants/api';
+import { createCookie } from '@utils/utils';
+import { useRouter } from 'next/router';
 
 export default function Login() {
   const router = useRouter();
@@ -10,19 +11,19 @@ export default function Login() {
     password: '',
     isSubmitting: false,
     message: '',
-  })
+  });
 
-  const { email, password, isSubmitting, message } = state
+  const { email, password, isSubmitting, message } = state;
 
   const handleChange = async (e: any) => {
-    const { name, value } = e.target
-    await setState({ ...state, [name]: value })
-  }
+    const { name, value } = e.target;
+    await setState({ ...state, [name]: value });
+  };
 
   const handleSubmit = async () => {
-    setState({ ...state, isSubmitting: true })
+    setState({ ...state, isSubmitting: true });
 
-    const { email, password } = state
+    const { email, password } = state;
     try {
       const res = await fetch(`${apiNextURl}/login`, {
         method: 'POST',
@@ -33,26 +34,26 @@ export default function Login() {
         headers: {
           'Content-Type': 'application/json',
         },
-      }).then(res => res.json())
+      }).then((res) => res.json());
 
-      const { token, success, msg, user } = res
+      const { token, success, msg, user } = res;
 
       if (!success) {
         return setState({
           ...state,
           message: msg,
           isSubmitting: false,
-        })
+        });
       }
       // expire in 30 minutes(same time as the cookie is invalidated on the backend)
-      (window as any).token = token
-      createCookie('token', token, 0.5)
+      (window as any).token = token;
+      createCookie('token', token, 0.5);
 
-      router.push({ pathname: '/session' })
+      router.push({ pathname: '/session' });
     } catch (e: any) {
-      setState({ ...state, message: e.toString(), isSubmitting: false })
+      setState({ ...state, message: e.toString(), isSubmitting: false });
     }
-  }
+  };
 
   return (
     <div className="wrapper">
@@ -63,8 +64,8 @@ export default function Login() {
         placeholder="email"
         value={email}
         name="email"
-        onChange={e => {
-          handleChange(e)
+        onChange={(e) => {
+          handleChange(e);
         }}
       />
 
@@ -74,8 +75,8 @@ export default function Login() {
         placeholder="password"
         value={password}
         name="password"
-        onChange={e => {
-          handleChange(e)
+        onChange={(e) => {
+          handleChange(e);
         }}
       />
 
@@ -84,5 +85,5 @@ export default function Login() {
       </button>
       <div className="message">{message}</div>
     </div>
-  )
+  );
 }

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+
+import { apiNextURl } from '@constants/api';
+import { deleteCookie } from '@utils/utils';
 import { useRouter } from 'next/router';
-import { apiNextURl } from '../api'
-import { deleteCookie } from '../utils'
 
 export default function Session() {
   const router = useRouter();
@@ -9,12 +10,12 @@ export default function Session() {
     isFetching: false,
     message: null,
     user: null,
-  })
+  });
 
-  const { isFetching, message, user = {} } = state
+  const { isFetching, message, user = {} } = state;
 
   const getUserInfo = async () => {
-    setState({ ...state, isFetching: true, message: 'fetching details...' })
+    setState({ ...state, isFetching: true, message: 'fetching details...' });
     try {
       const res = await fetch(`${apiNextURl}/session`, {
         method: 'GET',
@@ -23,26 +24,26 @@ export default function Session() {
           Accept: 'application/json',
           Authorization: (window as any).token,
         },
-      }).then(res => res.json())
+      }).then((res) => res.json());
 
-      const { success, user } = res
+      const { success, user } = res;
       if (!success) {
-        router.push('/login')
+        router.push('/login');
       }
-      setState({ ...state, user, message: null, isFetching: false })
+      setState({ ...state, user, message: null, isFetching: false });
     } catch (e: any) {
-      setState({ ...state, message: e.toString(), isFetching: false })
+      setState({ ...state, message: e.toString(), isFetching: false });
     }
-  }
+  };
 
   const handleLogout = () => {
-    deleteCookie('token')
-    router.push('/login')
-  }
+    deleteCookie('token');
+    router.push('/login');
+  };
 
   useEffect(() => {
-    getUserInfo()
-  }, [])
+    getUserInfo();
+  }, []);
 
   return (
     <div className="wrapper">
@@ -55,11 +56,11 @@ export default function Session() {
       <button
         style={{ height: '30px' }}
         onClick={() => {
-         handleLogout()
+          handleLogout();
         }}
       >
         logout
       </button>
     </div>
-  )
+  );
 }

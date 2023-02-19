@@ -1,10 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { apiURl } from '../../api'
+import { apiURl } from '@constants/api';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Data = {
-  name: string
-}
+  name: string;
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +14,7 @@ export default async function handler(
     method: req.method,
     body: req.body ? JSON.stringify(req.body) : undefined,
     headers: { 'Content-Type': 'application/json' },
-  })
+  });
   const data = await response.json();
-  res.status(res.statusCode).json(data)
+  res.status(res.statusCode).json(data);
 }
