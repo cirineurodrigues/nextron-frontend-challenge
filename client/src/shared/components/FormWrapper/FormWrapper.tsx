@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import Box from '@mui/material/Box';
+import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
 
 import IMAGES from '@constants/images';
@@ -22,19 +23,21 @@ const FormWrapper: React.FC<IFormWrapper> = ({ children }) => {
         backgroundSize: 'cover',
       })}
     >
-      <Paper
-        sx={(theme) => ({
-          maxWidth: theme.breakpoints.values.sm,
-          width: '100%',
-          padding: `${theme.spacing(4, 2)} !important`,
-          background: theme.palette.background.default,
-          [theme.breakpoints.up('sm')]: {
-            padding: `${theme.spacing(6, 4)} !important`,
-          },
-        })}
-      >
-        {children}
-      </Paper>
+      <Grow in>
+        <Paper
+          sx={(theme) => ({
+            maxWidth: theme.breakpoints.values.sm,
+            width: '100%',
+            padding: `${theme.spacing(4, 2)} !important`,
+            background: theme.palette.background.default,
+            [theme.breakpoints.up('sm')]: {
+              padding: `${theme.spacing(6, 4)} !important`,
+            },
+          })}
+        >
+          {children}
+        </Paper>
+      </Grow>
     </Box>
   );
 };

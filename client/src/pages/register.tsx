@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import Head from 'next/head';
 
-import { useRouter } from 'next/router';
+import Register from '@register/pages/Register';
 
-import { apiNextURl } from '@constants/api';
-
-export default function Register() {
-  const router = useRouter();
+export default function RegisterPage() {
+  /* const router = useRouter();
   const [state, setState] = useState<any>({
     email: '',
     password: '',
@@ -50,52 +48,14 @@ export default function Register() {
     } catch (e: any) {
       setState({ ...state, message: e.toString(), isSubmitting: false });
     }
-  };
+  }; */
 
   return (
-    <div className="wrapper">
-      <h1>Register</h1>
-      <input
-        className="input"
-        type="name"
-        placeholder="Name"
-        value={name}
-        name="name"
-        onChange={(e) => {
-          handleChange(e);
-        }}
-      />
-      <input
-        className="input"
-        type="text"
-        placeholder="Email"
-        value={email}
-        name="email"
-        onChange={(e) => {
-          handleChange(e);
-        }}
-      />
-      <input
-        className="input"
-        type="password"
-        placeholder="Password"
-        value={password}
-        name="password"
-        onChange={(e) => {
-          handleChange(e);
-        }}
-      />
-
-      <button disabled={isSubmitting} onClick={() => handleSubmit()}>
-        {isSubmitting ? '.....' : 'Sign Up'}
-      </button>
-      <div className="message">{message && <p>&bull; {message}</p>}</div>
-      <div>
-        {errors &&
-          errors.map((error: any, id: string) => {
-            return <p key={id}> &bull; {error}</p>;
-          })}
-      </div>
-    </div>
+    <>
+      <Head>
+        <title>Register - Nextron Energia</title>
+      </Head>
+      <Register />
+    </>
   );
 }
