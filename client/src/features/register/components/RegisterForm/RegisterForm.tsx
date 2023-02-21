@@ -139,7 +139,6 @@ const RegisterForm = () => {
         />
         <CustomButton
           color="primary"
-          disabled={loading}
           fullWidth
           loading={loading}
           sx={(theme) => ({

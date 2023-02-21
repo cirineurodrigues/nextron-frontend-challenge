@@ -22,7 +22,7 @@ interface IFormValues {
   email: string;
   password: string;
 }
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -113,7 +113,6 @@ const LoginForm = () => {
         />
         <CustomButton
           color="primary"
-          disabled={loading}
           fullWidth
           loading={loading}
           sx={(theme) => ({

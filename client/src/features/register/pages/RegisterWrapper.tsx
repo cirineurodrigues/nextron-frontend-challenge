@@ -2,7 +2,7 @@ import FormWrapper from '@components/FormWrapper';
 
 import RegisterForm from '../components/RegisterForm';
 
-const Register = () => {
+const RegisterWrapper: React.FC = () => {
   return (
     <FormWrapper>
       <RegisterForm />
@@ -10,4 +10,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterWrapper;

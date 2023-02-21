@@ -1,7 +1,7 @@
 import FormWrapper from '@components/FormWrapper';
 import LoginForm from '@login/components/LoginForm';
 
-const Login = () => {
+const LoginWrapper: React.FC = () => {
   return (
     <FormWrapper>
       <LoginForm />
@@ -9,4 +9,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginWrapper;

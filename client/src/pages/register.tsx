@@ -3,19 +3,8 @@ import Head from 'next/head';
 
 import COOKIES from '@constants/cookies';
 import PATHS from '@constants/paths';
-import Register from '@register/pages/Register';
+import RegisterWrapper from '@register/pages/RegisterWrapper';
 import { parseCookies } from 'nookies';
-
-export default function RegisterPage() {
-  return (
-    <>
-      <Head>
-        <title>Register - Nextron Energia</title>
-      </Head>
-      <Register />
-    </>
-  );
-}
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { [COOKIES.NAME]: token } = parseCookies(context);
@@ -33,3 +22,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {},
   };
 };
+
+export default function RegisterPage() {
+  return (
+    <>
+      <Head>
+        <title>Register - Nextron Energia</title>
+      </Head>
+      <RegisterWrapper />
+    </>
+  );
+}

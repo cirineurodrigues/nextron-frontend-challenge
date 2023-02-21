@@ -3,16 +3,16 @@ import Head from 'next/head';
 
 import COOKIES from '@constants/cookies';
 import PATHS from '@constants/paths';
-import Login from '@features/login/pages/Login';
+import LoginWrapper from '@login/pages/LoginWrapper';
 import { parseCookies } from 'nookies';
 
-export default function LoginPage() {
+export default function Login() {
   return (
     <>
       <Head>
         <title>Login - Nextron Energia</title>
       </Head>
-      <Login />
+      <LoginWrapper />
     </>
   );
 }

@@ -6,11 +6,11 @@ import Paper from '@mui/material/Paper';
 
 import IMAGES from '@constants/images';
 
-interface IFormWrapper {
+interface IFormWrapperProps {
   children: ReactNode;
 }
 
-const FormWrapper: React.FC<IFormWrapper> = ({ children }) => {
+const FormWrapper: React.FC<IFormWrapperProps> = ({ children }) => {
   return (
     <Box
       display="flex"
