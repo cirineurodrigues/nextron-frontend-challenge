@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify';
-
 import ENDPOINTS from '@constants/endpoints';
 import {
   ILoginData,
