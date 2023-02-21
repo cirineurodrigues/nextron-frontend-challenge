@@ -29,12 +29,19 @@ const FormWrapper: React.FC<IFormWrapper> = ({ children }) => {
             maxWidth: theme.breakpoints.values.sm,
             width: '100%',
             padding: `${theme.spacing(4, 2)} !important`,
-            background: theme.palette.background.default,
             [theme.breakpoints.up('sm')]: {
               padding: `${theme.spacing(6, 4)} !important`,
             },
+            position: 'relative',
           })}
         >
+          <Box display="flex" justifyContent="center" my={4}>
+            <img
+              alt={IMAGES.GREEN_LOGO.ALT}
+              src={IMAGES.GREEN_LOGO.SRC}
+              style={{ maxWidth: '300px', width: '100%' }}
+            />
+          </Box>
           {children}
         </Paper>
       </Grow>

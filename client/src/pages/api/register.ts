@@ -1,21 +1,37 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { apiURl } from '@constants/api';
-
-type Data = {
-  name: string;
-};
+import { METHODS, STATUS_CODES } from '@constants/http';
+import MESSAGES from '@constants/messages';
+import { IRegisterResponse } from '@interfaces/authInterfaces';
+import AuthService from '@shared/services/auth';
+import { AxiosResponse } from 'axios';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  const response = await fetch(`${apiURl}/register`, {
-    method: req.method,
-    body: req.body ? JSON.stringify(req.body) : undefined,
-    headers: { 'Content-Type': 'application/json' },
-  });
-  const data = await response.json();
-  res.status(res.statusCode).json(data);
+  const {
+    body: { email, name, password },
+    method,
+  } = req;
+
+  if (method !== METHODS.POST) {
+    return res
+      .status(STATUS_CODES.METHOD_NOT_ALLOWED)
+      .json({ errors: [MESSAGES.METHOD_NOT_ALLOWED] });
+  }
+
+  try {
+    const { data, status } = (await AuthService.register({
+      email,
+      name,
+      password,
+    })) as AxiosResponse<IRegisterResponse, any>;
+
+    return res.status(status).json(data);
+  } catch {
+    return res
+      .status(STATUS_CODES.INTERNAL_SERVER_ERROR)
+      .json({ errors: [MESSAGES.REQUEST_FAILED] });
+  }
 }

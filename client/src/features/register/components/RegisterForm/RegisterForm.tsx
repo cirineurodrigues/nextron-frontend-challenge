@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { useRouter } from 'next/router';
+
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 
-import IMAGES from '@constants/images';
+import CustomButton from '@components/CustomButton';
+import MESSAGES from '@constants/messages';
+import PATHS from '@constants/paths';
+import { useAuthContext } from '@contexts/AuthContext';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { IRegisterData } from '@interfaces/authInterfaces';
 import * as Yup from 'yup';
 
 interface IFormValues {
@@ -20,12 +25,20 @@ interface IFormValues {
 }
 
 const RegisterForm = () => {
+  const router = useRouter();
+
   const [showPassword, setShowPassword] = useState(false);
 
+  const { loading, signUp } = useAuthContext();
+
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email is invalid'),
-    name: Yup.string().required('Name is required'),
-    password: Yup.string().required('Password is required'),
+    email: Yup.string()
+      .required(MESSAGES.REQUIRED_EMAIL)
+      .email(MESSAGES.INVALID_EMAIL),
+    name: Yup.string().required(MESSAGES.REQUIRED_NAME),
+    password: Yup.string()
+      .required(MESSAGES.REQUIRED_PASSWORD)
+      .min(4, MESSAGES.MIN_LENGTH_PASSWORD),
   });
 
   const {
@@ -39,27 +52,18 @@ const RegisterForm = () => {
 
   const handleClickShowPassword = () => setShowPassword((value) => !value);
 
+  const handleRegister = async (data: IRegisterData) => {
+    await signUp(data);
+  };
+
   return (
-    <form
-      noValidate
-      onSubmit={handleSubmit((data) => {
-        /* in progress */
-        console.log(data);
-      })}
-    >
+    <form noValidate onSubmit={handleSubmit(handleRegister)}>
       <Box
         display="flex"
         alignItems="center"
         flexDirection="column"
         justifyContent="center"
       >
-        <Box display="flex" alignItems="center" my={4}>
-          <img
-            alt={IMAGES.GREEN_LOGO.ALT}
-            src={IMAGES.GREEN_LOGO.SRC}
-            style={{ maxWidth: '300px', width: '100%' }}
-          />
-        </Box>
         <Controller
           control={control}
           defaultValue=""
@@ -75,7 +79,7 @@ const RegisterForm = () => {
               required
               size="small"
               sx={(theme) => ({
-                marginBottom: theme.spacing(4),
+                marginBottom: theme.spacing(3),
               })}
               value={value}
             />
@@ -96,7 +100,7 @@ const RegisterForm = () => {
               required
               size="small"
               sx={(theme) => ({
-                marginBottom: theme.spacing(4),
+                marginBottom: theme.spacing(3),
               })}
               value={value}
             />
@@ -126,16 +130,34 @@ const RegisterForm = () => {
               required
               size="small"
               sx={(theme) => ({
-                marginBottom: theme.spacing(4),
+                marginBottom: theme.spacing(3),
               })}
               type={showPassword ? 'text' : 'password'}
               value={value}
             />
           )}
         />
-        <Button color="primary" fullWidth type="submit" variant="contained">
-          SIGN UP
-        </Button>
+        <CustomButton
+          color="primary"
+          disabled={loading}
+          fullWidth
+          loading={loading}
+          sx={(theme) => ({
+            marginBottom: theme.spacing(2),
+          })}
+          type="submit"
+          variant="contained"
+        >
+          REGISTER
+        </CustomButton>
+        <CustomButton
+          disabled={loading}
+          fullWidth
+          onClick={() => router.push(PATHS.LOGIN)}
+          variant="text"
+        >
+          ALREADY HAVE AN ACCOUNT?
+        </CustomButton>
       </Box>
     </form>
   );

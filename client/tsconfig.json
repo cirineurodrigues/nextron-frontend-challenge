@@ -18,7 +18,9 @@
     "paths": {
       "@components/*": ["src/shared/components/*"],
       "@constants/*": ["src/shared/constants/*"],
+      "@contexts/*": ["src/shared/contexts/*"],
       "@features/*": ["src/features/*"],
+      "@interfaces/*": ["src/shared/interfaces/*"],
       "@login/*": ["src/features/login/*"],
       "@providers/*": ["src/shared/providers/*"],
       "@register/*": ["src/features/register/*"],

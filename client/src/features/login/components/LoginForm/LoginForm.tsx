@@ -1,29 +1,39 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { useRouter } from 'next/router';
+
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 
-import IMAGES from '@constants/images';
+import CustomButton from '@components/CustomButton';
+import MESSAGES from '@constants/messages';
+import PATHS from '@constants/paths';
+import { useAuthContext } from '@contexts/AuthContext';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { ILoginData } from '@interfaces/authInterfaces';
 import * as Yup from 'yup';
 
 interface IFormValues {
   email: string;
   password: string;
 }
-
 const LoginForm = () => {
+  const router = useRouter();
+
   const [showPassword, setShowPassword] = useState(false);
 
+  const { loading, signIn } = useAuthContext();
+
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email is invalid'),
-    password: Yup.string().required('Password is required'),
+    email: Yup.string()
+      .required(MESSAGES.REQUIRED_EMAIL)
+      .email(MESSAGES.INVALID_EMAIL),
+    password: Yup.string().required(MESSAGES.REQUIRED_PASSWORD),
   });
 
   const {
@@ -37,27 +47,18 @@ const LoginForm = () => {
 
   const handleClickShowPassword = () => setShowPassword((value) => !value);
 
+  const handleSignIn = async (data: ILoginData) => {
+    await signIn(data);
+  };
+
   return (
-    <form
-      noValidate
-      onSubmit={handleSubmit((data) => {
-        /* in progress */
-        console.log(data);
-      })}
-    >
+    <form noValidate onSubmit={handleSubmit(handleSignIn)}>
       <Box
         display="flex"
         alignItems="center"
         flexDirection="column"
         justifyContent="center"
       >
-        <Box display="flex" alignItems="center" my={4}>
-          <img
-            alt={IMAGES.GREEN_LOGO.ALT}
-            src={IMAGES.GREEN_LOGO.SRC}
-            style={{ maxWidth: '300px', width: '100%' }}
-          />
-        </Box>
         <Controller
           control={control}
           defaultValue=""
@@ -73,7 +74,7 @@ const LoginForm = () => {
               required
               size="small"
               sx={(theme) => ({
-                marginBottom: theme.spacing(4),
+                marginBottom: theme.spacing(3),
               })}
               value={value}
             />
@@ -103,16 +104,34 @@ const LoginForm = () => {
               required
               size="small"
               sx={(theme) => ({
-                marginBottom: theme.spacing(4),
+                marginBottom: theme.spacing(3),
               })}
               type={showPassword ? 'text' : 'password'}
               value={value}
             />
           )}
         />
-        <Button color="primary" fullWidth type="submit" variant="contained">
+        <CustomButton
+          color="primary"
+          disabled={loading}
+          fullWidth
+          loading={loading}
+          sx={(theme) => ({
+            marginBottom: theme.spacing(2),
+          })}
+          type="submit"
+          variant="contained"
+        >
           LOGIN
-        </Button>
+        </CustomButton>
+        <CustomButton
+          disabled={loading}
+          fullWidth
+          onClick={() => router.push(PATHS.REGISTER)}
+          variant="text"
+        >
+          CREATE AN ACCOUNT
+        </CustomButton>
       </Box>
     </form>
   );

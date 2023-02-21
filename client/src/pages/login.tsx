@@ -1,58 +1,12 @@
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
+import COOKIES from '@constants/cookies';
+import PATHS from '@constants/paths';
 import Login from '@features/login/pages/Login';
+import { parseCookies } from 'nookies';
 
 export default function LoginPage() {
-  /* const router = useRouter();
-  const [state, setState] = useState({
-    email: '',
-    password: '',
-    isSubmitting: false,
-    message: '',
-  });
-
-  const { email, password, isSubmitting, message } = state;
-
-  const handleChange = async (e: any) => {
-    const { name, value } = e.target;
-    await setState({ ...state, [name]: value });
-  };
-
-  const handleSubmit = async () => {
-    setState({ ...state, isSubmitting: true });
-
-    const { email, password } = state;
-    try {
-      const res = await fetch(`${apiNextURl}/login`, {
-        method: 'POST',
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => res.json());
-
-      const { token, success, msg, user } = res;
-
-      if (!success) {
-        return setState({
-          ...state,
-          message: msg,
-          isSubmitting: false,
-        });
-      }
-      // expire in 30 minutes(same time as the cookie is invalidated on the backend)
-      (window as any).token = token;
-      createCookie('token', token, 0.5);
-
-      router.push({ pathname: '/session' });
-    } catch (e: any) {
-      setState({ ...state, message: e.toString(), isSubmitting: false });
-    }
-  }; */
-
   return (
     <>
       <Head>
@@ -62,3 +16,20 @@ export default function LoginPage() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { [COOKIES.NAME]: token } = parseCookies(context);
+
+  if (token) {
+    return {
+      redirect: {
+        destination: PATHS.ROOT,
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
