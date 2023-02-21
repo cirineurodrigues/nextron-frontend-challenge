@@ -5,9 +5,8 @@ import {
   IRegisterData,
   IRegisterResponse,
 } from '@interfaces/authInterfaces';
+import api from '@services/api';
 import { AxiosResponse } from 'axios';
-
-import api from '../api';
 
 export const login = async ({ email, password }: ILoginData) => {
   try {

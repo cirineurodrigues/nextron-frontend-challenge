@@ -1,6 +1,5 @@
 import FormWrapper from '@components/FormWrapper';
-
-import LoginForm from '../components/LoginForm';
+import LoginForm from '@login/components/LoginForm';
 
 const Login = () => {
   return (

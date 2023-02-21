@@ -24,6 +24,7 @@
       "@login/*": ["src/features/login/*"],
       "@providers/*": ["src/shared/providers/*"],
       "@register/*": ["src/features/register/*"],
+      "@services/*": ["src/shared/services/*"],
       "@shared/*": ["src/shared/*"],
       "@utils/*": ["src/shared/utils/*"]
     }

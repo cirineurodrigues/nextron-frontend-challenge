@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { METHODS, STATUS_CODES } from '@constants/http';
 import MESSAGES from '@constants/messages';
 import { ILoginResponse } from '@interfaces/authInterfaces';
-import AuthService from '@shared/services/auth';
+import AuthService from '@services/auth';
 import { AxiosResponse } from 'axios';
 
 export default async function handler(

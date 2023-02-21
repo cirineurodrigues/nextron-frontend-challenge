@@ -11,7 +11,7 @@ import {
   IRegisterResponse,
   IUser,
 } from '@interfaces/authInterfaces';
-import api from '@shared/services/api';
+import api from '@services/api';
 import { errorHandling } from '@shared/utils/errorsUtils';
 import axios, { AxiosResponse } from 'axios';
 import _isNull from 'lodash/isNull';
