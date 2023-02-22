@@ -1,4 +1,5 @@
 export interface IError {
-  errors: string[];
-  success: boolean;
+  msg?: string;
+  errors?: string[];
+  success?: boolean;
 }

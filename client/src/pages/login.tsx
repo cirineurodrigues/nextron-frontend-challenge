@@ -18,7 +18,7 @@ export default function Login() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { [COOKIES.NAME]: token } = parseCookies(context);
+  const { [COOKIES.TOKEN_NAME]: token } = parseCookies(context);
 
   if (token) {
     return {

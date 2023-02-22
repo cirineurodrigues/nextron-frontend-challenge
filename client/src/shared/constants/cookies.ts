@@ -1,5 +1,5 @@
 const COOKIES = {
-  NAME: 'nextron.token',
+  TOKEN_NAME: 'token',
 };
 
 export default COOKIES;

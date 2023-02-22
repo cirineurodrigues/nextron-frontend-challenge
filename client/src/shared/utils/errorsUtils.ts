@@ -8,12 +8,14 @@ export const errorHandling = (error: unknown | AxiosError) => {
   if (isAxiosError(error)) {
     const { response } = error as AxiosError;
 
-    const { errors } = response?.data as IError;
+    const { errors, msg } = response?.data as IError;
 
-    errors.map((error) => notifyError(error));
+    if (msg) {
+      notifyError(msg);
+    } else {
+      errors?.map((error) => notifyError(error));
+    }
   } else {
     notifyError(MESSAGES.REQUEST_FAILED);
   }
-
-  console.error(error);
 };

@@ -1,11 +1,13 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 
+import NavBar from '@components/NavBar';
 import COOKIES from '@constants/cookies';
 import PATHS from '@constants/paths';
 import { parseCookies } from 'nookies';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { [COOKIES.NAME]: token } = parseCookies(context);
+  const { [COOKIES.TOKEN_NAME]: token } = parseCookies(context);
 
   if (!token) {
     return {
@@ -22,5 +24,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default function Home() {
-  return <h1>home</h1>;
+  return (
+    <>
+      <Head>
+        <title>Home - Nextron Energia</title>
+      </Head>
+      <NavBar />
+    </>
+  );
 }

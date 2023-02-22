@@ -39,7 +39,7 @@ export function AuthProvider({ children }: any) {
   const isAuthenticated = _isNull(user);
 
   useEffect(() => {
-    const { [COOKIES.NAME]: token } = parseCookies();
+    const { [COOKIES.TOKEN_NAME]: token } = parseCookies();
 
     if (token) {
       /* TODO: get user information */
@@ -60,13 +60,14 @@ export function AuthProvider({ children }: any) {
         }
       );
 
-      setCookie(undefined, COOKIES.NAME, token, {
+      setCookie(undefined, COOKIES.TOKEN_NAME, token, {
         maxAge: 60 * 60 * 0.5, // 30 minutes
+        secure: false,
       });
 
-      api.defaults.headers['Authorization'] = `Bearer ${token}`;
-
       setUser(user);
+
+      Router.push(PATHS.ROOT);
     } catch (error) {
       errorHandling(error);
     } finally {
