@@ -1,6 +1,8 @@
 import _isUndefined from 'lodash/isUndefined';
 
-export const BASE_URL = 'http://localhost:8081';
+export const BASE_URL = 'http://api:8081';
+
+export const NEXT_BASE_URL = 'http://localhost:3001/api';
 
 const ENDPOINTS = {
   /**

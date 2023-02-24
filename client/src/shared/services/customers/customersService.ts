@@ -3,22 +3,28 @@ import {
   ICreateCustomerResponse,
   ICustomer,
   ICustomerBase,
+  IGetCustomersResponse,
 } from '@interfaces/customersInterfaces';
 import {
   IPaymentMethod,
   IPaymentMethodsCount,
 } from '@interfaces/paymentMethodsInterfaces';
-import api from '@services/api';
+import getAPIClient from '@services/axios';
 import { AxiosResponse } from 'axios';
 
-export const createCustomer = async ({
-  location: { latitude, longitude, country, street1 },
-  email,
-  name,
-  telephone,
-}: ICustomerBase) => {
+export const createCustomer = async (
+  context: any,
+  {
+    Location: { latitude, longitude, country, street1 },
+    email,
+    name,
+    telephone,
+  }: ICustomerBase
+) => {
+  const apiClient = getAPIClient(context);
+
   try {
-    const response = await api.post<
+    const response = await apiClient.post<
       ICustomerBase,
       AxiosResponse<ICreateCustomerResponse>
     >(ENDPOINTS.CUSTOMERS(), {
@@ -33,9 +39,11 @@ export const createCustomer = async ({
   }
 };
 
-export const getCustomers = async () => {
+export const getCustomers = async (context: any) => {
+  const apiClient = getAPIClient(context);
+
   try {
-    const response = await api.get<AxiosResponse<ICustomer[]>>(
+    const response = await apiClient.get<AxiosResponse<ICustomerBase[]>>(
       ENDPOINTS.CUSTOMERS()
     );
     return response;
@@ -44,9 +52,11 @@ export const getCustomers = async () => {
   }
 };
 
-export const getCustomerById = async (id: string) => {
+export const getCustomerById = async (context: any, id: string) => {
+  const apiClient = getAPIClient(context);
+
   try {
-    const response = await api.get<AxiosResponse<ICustomer>>(
+    const response = await apiClient.get<AxiosResponse<ICustomer>>(
       ENDPOINTS.CUSTOMERS(id)
     );
     return response;
@@ -55,9 +65,11 @@ export const getCustomerById = async (id: string) => {
   }
 };
 
-export const getCustomerPaymentMethods = async (id: string) => {
+export const getCustomerPaymentMethods = async (context: any, id: string) => {
+  const apiClient = getAPIClient(context);
+
   try {
-    const response = await api.get<AxiosResponse<IPaymentMethod[]>>(
+    const response = await apiClient.get<AxiosResponse<IPaymentMethod[]>>(
       ENDPOINTS.CUSTOMER_PAYMENT_METHODS(id)
     );
     return response;
@@ -66,9 +78,14 @@ export const getCustomerPaymentMethods = async (id: string) => {
   }
 };
 
-export const getCustomerPaymentMethodsCount = async (id: string) => {
+export const getCustomerPaymentMethodsCount = async (
+  context: any,
+  id: string
+) => {
+  const apiClient = getAPIClient(context);
+
   try {
-    const response = await api.get<AxiosResponse<IPaymentMethodsCount>>(
+    const response = await apiClient.get<AxiosResponse<IPaymentMethodsCount>>(
       ENDPOINTS.CUSTOMER_PAYMENT_METHODS_COUNT(id)
     );
     return response;

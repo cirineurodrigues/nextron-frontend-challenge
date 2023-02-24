@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import Router from 'next/router';
 
 import COOKIES from '@constants/cookies';
+import { NEXT_BASE_URL } from '@constants/endpoints';
 import PATHS from '@constants/paths';
 import {
   ILoginData,
@@ -11,11 +12,10 @@ import {
   IRegisterResponse,
   IUser,
 } from '@interfaces/authInterfaces';
-import api from '@services/api';
 import { errorHandling } from '@shared/utils/errorsUtils';
 import axios, { AxiosResponse } from 'axios';
 import _isNull from 'lodash/isNull';
-import { parseCookies, setCookie } from 'nookies';
+import { destroyCookie, parseCookies, setCookie } from 'nookies';
 
 interface ISignInData {
   email: string;
@@ -26,6 +26,7 @@ interface IAuthContext {
   isAuthenticated: boolean;
   loading: boolean;
   signIn: (data: ISignInData) => Promise<void>;
+  signOut: () => void;
   signUp: (data: IRegisterData) => Promise<void>;
   user: IUser | null;
 }
@@ -53,7 +54,7 @@ export function AuthProvider({ children }: any) {
       const {
         data: { token, user },
       } = await axios.post<ILoginData, AxiosResponse<ILoginResponse>>(
-        '/api/login',
+        `${NEXT_BASE_URL}/login`,
         {
           email,
           password,
@@ -62,12 +63,11 @@ export function AuthProvider({ children }: any) {
 
       setCookie(undefined, COOKIES.TOKEN_NAME, token, {
         maxAge: 60 * 60 * 0.5, // 30 minutes
-        secure: false,
       });
 
       setUser(user);
 
-      Router.push(PATHS.ROOT);
+      Router.push(PATHS.CUSTOMERS);
     } catch (error) {
       errorHandling(error);
     } finally {
@@ -75,12 +75,18 @@ export function AuthProvider({ children }: any) {
     }
   };
 
+  const signOut = () => {
+    destroyCookie(undefined, COOKIES.TOKEN_NAME);
+
+    Router.push(PATHS.LOGIN);
+  };
+
   const signUp = async ({ email, name, password }: IRegisterData) => {
     setLoading(true);
 
     try {
       await axios.post<IRegisterData, AxiosResponse<IRegisterResponse>>(
-        '/api/register',
+        `${NEXT_BASE_URL}/register`,
         {
           email,
           name,
@@ -98,7 +104,7 @@ export function AuthProvider({ children }: any) {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, loading, signIn, signUp, user }}
+      value={{ isAuthenticated, loading, signIn, signOut, signUp, user }}
     >
       {children}
     </AuthContext.Provider>

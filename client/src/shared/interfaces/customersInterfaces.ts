@@ -14,8 +14,8 @@ export interface ILocation {
 }
 
 export interface ICustomerBase {
-  customerId: string;
-  location: ILocation;
+  customerID: string;
+  Location: ILocation;
   email: string;
   name: string;
   telephone: string;
@@ -31,5 +31,5 @@ export interface ICustomer extends ICustomerBase {
 }
 
 export interface ICreateCustomerResponse {
-  customerId: string;
+  customerID: string;
 }

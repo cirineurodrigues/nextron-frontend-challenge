@@ -1,9 +1,5 @@
-import { BASE_URL } from '@constants/endpoints';
-import axios from 'axios';
+import getAPIClient from './axios';
 
-const api = axios.create({
-  baseURL: BASE_URL,
-  withCredentials: true,
-});
+const api = getAPIClient();
 
 export default api;

@@ -17,14 +17,15 @@ import Typography from '@mui/material/Typography';
 
 import IMAGES from '@constants/images';
 import PATHS from '@constants/paths';
+import { useAuthContext } from '@contexts/AuthContext';
 
-const pages = ['Overview', 'Customers', 'Reports', 'Leaderboard', 'Tags'];
-const settings = ['Logout'];
+const pages = ['Customers', 'Payments'];
 
 const NavBar: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
+  const { signOut } = useAuthContext();
   const router = useRouter();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -40,6 +41,7 @@ const NavBar: React.FC = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    signOut();
   };
 
   return (
@@ -130,11 +132,9 @@ const NavBar: React.FC = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Box>
