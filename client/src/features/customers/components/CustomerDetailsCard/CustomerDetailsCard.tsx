@@ -4,17 +4,24 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
+import CustomButton from '@components/CustomButton';
 import DataItem from '@components/DataItem';
 import { ICustomerBase } from '@interfaces/customersInterfaces';
+import { IPaymentMethod } from '@interfaces/paymentMethodsInterfaces';
+import PaymentsTable from '@payments/components/PaymentsTable';
 import { format } from 'date-fns';
 
 import Map from '../Map';
 
 interface ICustomerDetailsCardProps {
   customer: ICustomerBase;
+  payments: IPaymentMethod[];
 }
 
-const CustomerDetails: React.FC<ICustomerDetailsCardProps> = ({ customer }) => {
+const CustomerDetails: React.FC<ICustomerDetailsCardProps> = ({
+  customer,
+  payments,
+}) => {
   return (
     <Paper sx={{ overflow: 'hidden' }}>
       <Map />
@@ -57,6 +64,24 @@ const CustomerDetails: React.FC<ICustomerDetailsCardProps> = ({ customer }) => {
             <DataItem text={customer.Location.country} title="Country" />
           </Grid>
         </Grid>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={(theme) => ({
+            padding: theme.spacing(4, 2, 2),
+          })}
+        >
+          <Typography component="h2" variant="h5">
+            Payment Methods
+          </Typography>
+          <CustomButton color="primary" variant="contained">
+            Add Payment Method
+          </CustomButton>
+        </Box>
+        <Box p={2}>
+          <PaymentsTable payments={payments} />
+        </Box>
       </Box>
     </Paper>
   );

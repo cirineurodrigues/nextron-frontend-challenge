@@ -26,19 +26,26 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     data: { customer },
   } = (await CustomersService.getCustomerById(context, customerID)) as any;
 
+  const {
+    data: { payments },
+  } = (await CustomersService.getCustomerPaymentMethods(
+    context,
+    customerID
+  )) as any;
+
   return {
-    props: { customer },
+    props: { customer, payments },
   };
 };
 
-export default function Customer({ customer }: any) {
+export default function Customer({ customer, payments }: any) {
   return (
     <>
       <Head>
         <title>{customer.name}</title>
       </Head>
       <NavBar />
-      <CustomerWrapper customer={customer} />
+      <CustomerWrapper customer={customer} payments={payments} />
     </>
   );
 }

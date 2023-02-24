@@ -1,4 +1,5 @@
 export interface IBillingAddress {
+  id: number;
   country: string;
   postalCode: string;
   latitude: number;
@@ -14,16 +15,18 @@ export interface IBillingAddress {
 }
 
 export interface IPaymentMethod {
+  id: number;
+  location_id: number;
+  BillingAddress: IBillingAddress;
+  customerId: number;
+  registration_time: string;
   methodType: string;
-  paymentMethodId: string;
-  instrumentId: string;
   cardBin: string;
   cardLastFour: string;
   expiryMonth: number;
   expiryYear: number;
   eWallet: string;
   nameOnCard: string;
-  billingAddress: IBillingAddress;
 }
 
 export interface IPaymentMethodsCount {

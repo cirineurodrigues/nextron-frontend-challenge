@@ -21,7 +21,7 @@ import { useAuthContext } from '@contexts/AuthContext';
 
 const pages = [
   { label: 'Customers', path: PATHS.CUSTOMERS },
-  { label: 'Payments', path: PATHS.ROOT },
+  { label: 'Payments', path: PATHS.PAYMENTS },
 ];
 
 const NavBar: React.FC = () => {

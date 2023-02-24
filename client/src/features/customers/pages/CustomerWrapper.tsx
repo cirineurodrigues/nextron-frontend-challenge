@@ -4,14 +4,19 @@ import Typography from '@mui/material/Typography';
 import CustomButton from '@components/CustomButton';
 import CustomContainer from '@components/CustomContainer';
 import { ICustomerBase } from '@interfaces/customersInterfaces';
+import { IPaymentMethod } from '@interfaces/paymentMethodsInterfaces';
 
 import CustomerDetailsCard from '../components/CustomerDetailsCard';
 
 interface ICustomerWrapperProps {
   customer: ICustomerBase;
+  payments: IPaymentMethod[];
 }
 
-const CustomerWrapper: React.FC<ICustomerWrapperProps> = ({ customer }) => {
+const CustomerWrapper: React.FC<ICustomerWrapperProps> = ({
+  customer,
+  payments,
+}) => {
   return (
     <CustomContainer>
       <Box
@@ -28,7 +33,7 @@ const CustomerWrapper: React.FC<ICustomerWrapperProps> = ({ customer }) => {
           Edit Customer
         </CustomButton>
       </Box>
-      <CustomerDetailsCard customer={customer} />
+      <CustomerDetailsCard customer={customer} payments={payments} />
     </CustomContainer>
   );
 };

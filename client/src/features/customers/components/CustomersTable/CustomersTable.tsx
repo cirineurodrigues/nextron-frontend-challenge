@@ -9,11 +9,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import CustomButton from '@components/CustomButton';
+import EmptyState from '@components/EmptyState';
 import PATHS from '@constants/paths';
 import { ICustomerBase } from '@interfaces/customersInterfaces';
 import _isEmpty from 'lodash/isEmpty';
 
-import CustomersEmptyState from '../CustomersEmptyState';
 import { StyledTableCell, StyledTableRow } from './CustomersTable.styles';
 
 interface ICustomersTableProps {
@@ -26,7 +26,7 @@ const CustomersTable: React.FC<ICustomersTableProps> = ({ customers }) => {
   return (
     <>
       {_isEmpty(customers) ? (
-        <CustomersEmptyState />
+        <EmptyState text="No customers found" />
       ) : (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }}>
