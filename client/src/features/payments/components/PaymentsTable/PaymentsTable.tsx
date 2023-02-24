@@ -21,7 +21,7 @@ const PaymentsTable: React.FC<PaymentsTableProps> = ({ payments }) => {
   return (
     <>
       {_isEmpty(payments) ? (
-        <EmptyState text="No payments found" />
+        <EmptyState text="No payment methods found" />
       ) : (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }}>

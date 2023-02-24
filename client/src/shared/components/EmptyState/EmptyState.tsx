@@ -18,7 +18,7 @@ const EmptyState: React.FC<IEmptyStateProps> = ({ text = 'No data found' }) => {
       justifyContent="center"
       my={10}
     >
-      <Typography component="h2" mb={2} variant="h4">
+      <Typography component="h2" mb={2} textAlign="center" variant="h4">
         {text}
       </Typography>
       <Image

@@ -72,7 +72,7 @@ const ENDPOINTS = {
    * creates new payment methods for a customer
    *
    */
-  PAYMENT_METHODS: (id: string) =>
+  PAYMENT_METHODS: (id?: string) =>
     _isUndefined(id) ? '/paymentmethods' : `/paymentmethods/${id}`,
   /**
    *
