@@ -19,6 +19,7 @@ export interface ICustomerBase {
   email: string;
   name: string;
   telephone: string;
+  registration_time: string;
 }
 
 export interface ICustomer extends ICustomerBase {

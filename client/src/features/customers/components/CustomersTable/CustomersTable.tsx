@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,6 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import CustomButton from '@components/CustomButton';
+import PATHS from '@constants/paths';
 import { ICustomerBase } from '@interfaces/customersInterfaces';
 import _isEmpty from 'lodash/isEmpty';
 
@@ -18,6 +21,8 @@ interface ICustomersTableProps {
 }
 
 const CustomersTable: React.FC<ICustomersTableProps> = ({ customers }) => {
+  const router = useRouter();
+
   return (
     <>
       {_isEmpty(customers) ? (
@@ -54,7 +59,16 @@ const CustomersTable: React.FC<ICustomersTableProps> = ({ customers }) => {
                     </TableCell>
                     <TableCell align="right">{customer.customerID}</TableCell>
                     <TableCell align="center">
-                      <CustomButton variant="text">See details</CustomButton>
+                      <CustomButton
+                        onClick={() =>
+                          router.push(
+                            `${PATHS.CUSTOMERS}/${customer.customerID}`
+                          )
+                        }
+                        variant="text"
+                      >
+                        See details
+                      </CustomButton>
                     </TableCell>
                   </StyledTableRow>
                 );

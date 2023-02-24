@@ -19,7 +19,10 @@ import IMAGES from '@constants/images';
 import PATHS from '@constants/paths';
 import { useAuthContext } from '@contexts/AuthContext';
 
-const pages = ['Customers', 'Payments'];
+const pages = [
+  { label: 'Customers', path: PATHS.CUSTOMERS },
+  { label: 'Payments', path: PATHS.ROOT },
+];
 
 const NavBar: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -35,8 +38,9 @@ const NavBar: React.FC = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (path: string) => {
     setAnchorElNav(null);
+    router.push(path);
   };
 
   const handleCloseUserMenu = () => {
@@ -80,8 +84,11 @@ const NavBar: React.FC = () => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                  <MenuItem
+                    key={page.label}
+                    onClick={() => handleCloseNavMenu(page.path)}
+                  >
+                    <Typography textAlign="center">{page.label}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -102,11 +109,11 @@ const NavBar: React.FC = () => {
               <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {pages.map((page) => (
                   <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
+                    key={page.label}
+                    onClick={() => handleCloseNavMenu(page.path)}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
-                    {page}
+                    {page.label}
                   </Button>
                 ))}
               </Box>

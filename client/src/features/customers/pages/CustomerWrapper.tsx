@@ -5,13 +5,13 @@ import CustomButton from '@components/CustomButton';
 import CustomContainer from '@components/CustomContainer';
 import { ICustomerBase } from '@interfaces/customersInterfaces';
 
-import CustomersTable from '../components/CustomersTable';
+import CustomerDetailsCard from '../components/CustomerDetailsCard';
 
-interface ICustomersWrapperProps {
-  customers: ICustomerBase[];
+interface ICustomerWrapperProps {
+  customer: ICustomerBase;
 }
 
-const CustomersWrapper: React.FC<ICustomersWrapperProps> = ({ customers }) => {
+const CustomerWrapper: React.FC<ICustomerWrapperProps> = ({ customer }) => {
   return (
     <CustomContainer>
       <Box
@@ -22,15 +22,15 @@ const CustomersWrapper: React.FC<ICustomersWrapperProps> = ({ customers }) => {
         mt={2}
       >
         <Typography component="h1" variant="h5">
-          Customers
+          Customer: {customer.name}
         </Typography>
         <CustomButton color="primary" variant="contained">
-          Add Customer
+          Edit Customer
         </CustomButton>
       </Box>
-      <CustomersTable customers={customers} />
+      <CustomerDetailsCard customer={customer} />
     </CustomContainer>
   );
 };
 
-export default CustomersWrapper;
+export default CustomerWrapper;

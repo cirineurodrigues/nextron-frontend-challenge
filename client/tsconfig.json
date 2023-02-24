@@ -19,6 +19,7 @@
       "@components/*": ["src/shared/components/*"],
       "@constants/*": ["src/shared/constants/*"],
       "@contexts/*": ["src/shared/contexts/*"],
+      "@customers/*": ["src/features/customers*"],
       "@features/*": ["src/features/*"],
       "@interfaces/*": ["src/shared/interfaces/*"],
       "@login/*": ["src/features/login/*"],

@@ -3,7 +3,6 @@ import {
   ICreateCustomerResponse,
   ICustomer,
   ICustomerBase,
-  IGetCustomersResponse,
 } from '@interfaces/customersInterfaces';
 import {
   IPaymentMethod,
@@ -52,7 +51,7 @@ export const getCustomers = async (context: any) => {
   }
 };
 
-export const getCustomerById = async (context: any, id: string) => {
+export const getCustomerById = async (context: any, id?: string) => {
   const apiClient = getAPIClient(context);
 
   try {

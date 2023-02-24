@@ -5,7 +5,6 @@ import NavBar from '@components/NavBar';
 import COOKIES from '@constants/cookies';
 import PATHS from '@constants/paths';
 import CustomersWrapper from '@features/customers/pages/CustomersWrapper';
-import { ICustomerBase } from '@interfaces/customersInterfaces';
 import CustomersService from '@services/customers';
 import { parseCookies } from 'nookies';
 
