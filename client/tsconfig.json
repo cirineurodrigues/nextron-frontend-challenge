@@ -16,6 +16,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "@assets/*": ["src/shared/assets/*"],
       "@components/*": ["src/shared/components/*"],
       "@constants/*": ["src/shared/constants/*"],
       "@contexts/*": ["src/shared/contexts/*"],

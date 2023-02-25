@@ -1,8 +1,11 @@
+import { useRouter } from 'next/router';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import CustomButton from '@components/CustomButton';
 import CustomContainer from '@components/CustomContainer';
+import PATHS from '@constants/paths';
 import { ICustomerBase } from '@interfaces/customersInterfaces';
 
 import CustomersTable from '../components/CustomersTable';
@@ -12,6 +15,8 @@ interface ICustomersWrapperProps {
 }
 
 const CustomersWrapper: React.FC<ICustomersWrapperProps> = ({ customers }) => {
+  const router = useRouter();
+
   return (
     <CustomContainer>
       <Box
@@ -24,7 +29,11 @@ const CustomersWrapper: React.FC<ICustomersWrapperProps> = ({ customers }) => {
         <Typography component="h1" variant="h5">
           Customers
         </Typography>
-        <CustomButton color="primary" variant="contained">
+        <CustomButton
+          color="primary"
+          onClick={() => router.push(PATHS.CREATE_CUSTOMER)}
+          variant="contained"
+        >
           Add Customer
         </CustomButton>
       </Box>

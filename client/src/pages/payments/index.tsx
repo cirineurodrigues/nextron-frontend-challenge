@@ -5,7 +5,6 @@ import NavBar from '@components/NavBar';
 import COOKIES from '@constants/cookies';
 import PATHS from '@constants/paths';
 import PaymentsWrapper from '@features/payments/pages/PaymentsWrapper';
-import CustomersService from '@services/customers';
 import PaymentsService from '@services/payments';
 import { parseCookies } from 'nookies';
 

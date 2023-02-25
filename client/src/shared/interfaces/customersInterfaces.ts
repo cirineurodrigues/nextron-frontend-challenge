@@ -1,25 +1,25 @@
 export interface ILocation {
   country: string;
-  postalCode: string;
+  postalCode?: string;
   latitude: number;
   longitude: number;
-  addresseeName: string;
+  addresseeName?: string;
   street1: string;
-  street2: string;
-  neighbourhood: string;
-  zone: string;
-  city: string;
-  region: string;
-  poBoxNumber: string;
+  street2?: string;
+  neighbourhood?: string;
+  zone?: string;
+  city?: string;
+  region?: string;
+  poBoxNumber?: string;
 }
 
 export interface ICustomerBase {
-  customerID: string;
+  customerID?: string;
   Location: ILocation;
   email: string;
   name: string;
   telephone: string;
-  registration_time: string;
+  registration_time?: string;
 }
 
 export interface ICustomer extends ICustomerBase {

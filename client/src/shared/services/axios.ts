@@ -12,6 +12,7 @@ const getAPIClient = (context?: any) => {
       'Content-type': 'application/json',
       Cookie: `${COOKIES.TOKEN_NAME}=${token}`,
     },
+    withCredentials: true,
   });
 
   return api;

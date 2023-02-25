@@ -1,18 +1,19 @@
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
+import NavBar from '@components/NavBar';
 import COOKIES from '@constants/cookies';
 import PATHS from '@constants/paths';
-import LoginWrapper from '@login/pages/LoginWrapper';
+import CreateCustomerWrapper from '@customers//pages/CreateCustomerWrapper';
 import { parseCookies } from 'nookies';
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { [COOKIES.TOKEN_NAME]: token } = parseCookies(context);
 
-  if (token) {
+  if (!token) {
     return {
       redirect: {
-        destination: PATHS.ROOT,
+        destination: PATHS.LOGIN,
         permanent: false,
       },
     };
@@ -23,13 +24,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default function Login() {
+export default function CreateCustomer() {
   return (
     <>
       <Head>
-        <title>Login - Nextron Energia</title>
+        <title>Create Customer - Nextron Energia</title>
       </Head>
-      <LoginWrapper />
+      <NavBar />
+      <CreateCustomerWrapper />
     </>
   );
 }

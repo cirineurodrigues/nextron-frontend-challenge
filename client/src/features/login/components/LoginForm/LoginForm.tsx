@@ -22,10 +22,11 @@ interface IFormValues {
   email: string;
   password: string;
 }
-const LoginForm: React.FC = () => {
-  const router = useRouter();
 
+const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const router = useRouter();
 
   const { loading, signIn } = useAuthContext();
 

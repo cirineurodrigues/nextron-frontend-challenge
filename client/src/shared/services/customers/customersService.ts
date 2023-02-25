@@ -1,3 +1,4 @@
+import COOKIES from '@constants/cookies';
 import ENDPOINTS from '@constants/endpoints';
 import {
   ICreateCustomerResponse,
@@ -8,11 +9,12 @@ import {
   IPaymentMethod,
   IPaymentMethodsCount,
 } from '@interfaces/paymentMethodsInterfaces';
+import api from '@services/api';
 import getAPIClient from '@services/axios';
 import { AxiosResponse } from 'axios';
 
 export const createCustomer = async (
-  context: any,
+  token: string,
   {
     Location: { latitude, longitude, country, street1 },
     email,
@@ -20,18 +22,24 @@ export const createCustomer = async (
     telephone,
   }: ICustomerBase
 ) => {
-  const apiClient = getAPIClient(context);
-
   try {
-    const response = await apiClient.post<
+    const response = await api.post<
       ICustomerBase,
       AxiosResponse<ICreateCustomerResponse>
-    >(ENDPOINTS.CUSTOMERS(), {
-      location: { latitude, longitude, country, street1 },
-      email,
-      name,
-      telephone,
-    });
+    >(
+      ENDPOINTS.CUSTOMERS(),
+      {
+        location: { latitude, longitude, country, street1 },
+        email,
+        name,
+        telephone,
+      },
+      {
+        headers: {
+          Cookie: `${COOKIES.TOKEN_NAME}=${token}`,
+        },
+      }
+    );
     return response;
   } catch (error) {
     return error;

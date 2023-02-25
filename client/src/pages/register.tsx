@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default function RegisterPage() {
+export default function Register() {
   return (
     <>
       <Head>
