@@ -1,17 +1,11 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import CustomButton from '@components/CustomButton';
 import CustomContainer from '@components/CustomContainer';
-import { IPaymentMethod } from '@interfaces/paymentMethodsInterfaces';
 
-import PaymentsTable from '../components/PaymentsTable';
+import AddPaymentMethodForm from '../components/AddPaymentMethodForm';
 
-interface IPaymentsWrapperProps {
-  payments: IPaymentMethod[];
-}
-
-const PaymentsWrapper: React.FC<IPaymentsWrapperProps> = ({ payments }) => {
+const AddPaymentMethodWrapper: React.FC = () => {
   return (
     <CustomContainer>
       <Box
@@ -22,12 +16,12 @@ const PaymentsWrapper: React.FC<IPaymentsWrapperProps> = ({ payments }) => {
         mt={2}
       >
         <Typography component="h1" variant="h5">
-          Payments
+          Add Payment Method
         </Typography>
       </Box>
-      <PaymentsTable payments={payments} />
+      <AddPaymentMethodForm />
     </CustomContainer>
   );
 };
 
-export default PaymentsWrapper;
+export default AddPaymentMethodWrapper;

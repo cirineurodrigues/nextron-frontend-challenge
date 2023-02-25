@@ -61,9 +61,7 @@ const CustomersTable: React.FC<ICustomersTableProps> = ({ customers }) => {
                     <TableCell align="center">
                       <CustomButton
                         onClick={() =>
-                          router.push(
-                            `${PATHS.CUSTOMERS}/${customer.customerID}`
-                          )
+                          router.push(`${PATHS.CUSTOMERS(customer.customerID)}`)
                         }
                         variant="text"
                       >

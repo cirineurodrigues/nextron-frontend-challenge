@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 interface IDataItemProps {
-  text: string | number;
+  text: string | number | undefined;
   title: string;
 }
 

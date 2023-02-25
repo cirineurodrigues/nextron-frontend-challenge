@@ -20,7 +20,7 @@ import PATHS from '@constants/paths';
 import { useAuthContext } from '@contexts/AuthContext';
 
 const pages = [
-  { label: 'Customers', path: PATHS.CUSTOMERS },
+  { label: 'Customers', path: PATHS.CUSTOMERS() },
   { label: 'Payments', path: PATHS.PAYMENTS },
 ];
 

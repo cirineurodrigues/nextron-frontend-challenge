@@ -1,25 +1,25 @@
 export interface IBillingAddress {
-  id: number;
+  id?: number;
   country: string;
-  postalCode: string;
+  postalCode?: string;
   latitude: number;
   longitude: number;
-  addresseeName: string;
+  addresseeName?: string;
   street1: string;
-  street2: string;
-  neighbourhood: string;
-  zone: string;
-  city: string;
-  region: string;
-  poBoxNumber: string;
+  street2?: string;
+  neighbourhood?: string;
+  zone?: string;
+  city?: string;
+  region?: string;
+  poBoxNumber?: string;
 }
 
 export interface IPaymentMethod {
-  id: number;
-  location_id: number;
-  BillingAddress: IBillingAddress;
+  id?: number;
+  location_id?: number;
+  billingAddress: IBillingAddress;
   customerId: number;
-  registration_time: string;
+  registration_time?: string;
   methodType: string;
   cardBin: string;
   cardLastFour: string;
@@ -40,4 +40,8 @@ export interface IPayment {
   successfulRegistration: boolean;
   registrationTime: number;
   lastVerified: number;
+}
+
+export interface IAddPaymentMethodResponse {
+  customerID: string;
 }

@@ -67,7 +67,7 @@ export function AuthProvider({ children }: any) {
 
       setUser(user);
 
-      Router.push(PATHS.CUSTOMERS);
+      Router.push(PATHS.CUSTOMERS());
     } catch (error) {
       errorHandling(error);
     } finally {

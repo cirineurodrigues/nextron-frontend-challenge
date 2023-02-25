@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -6,10 +8,10 @@ import Typography from '@mui/material/Typography';
 
 import CustomButton from '@components/CustomButton';
 import DataItem from '@components/DataItem';
+import PATHS from '@constants/paths';
 import { ICustomerBase } from '@interfaces/customersInterfaces';
 import { IPaymentMethod } from '@interfaces/paymentMethodsInterfaces';
 import PaymentsTable from '@payments/components/PaymentsTable';
-import { format } from 'date-fns';
 
 import Map from '../Map';
 
@@ -22,6 +24,7 @@ const CustomerDetails: React.FC<ICustomerDetailsCardProps> = ({
   customer,
   payments,
 }) => {
+  const router = useRouter();
   return (
     <Paper sx={{ overflow: 'hidden' }}>
       <Map />
@@ -48,15 +51,10 @@ const CustomerDetails: React.FC<ICustomerDetailsCardProps> = ({
         <Grid container spacing={2} p={2} pt={12}>
           <Grid item xs={12} sm={6} md={4}>
             <DataItem text={customer.customerID} title="Customer ID" />
-            <DataItem text={customer.name} title="Name" />
             <DataItem text={customer.email} title="E-mail" />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <DataItem text={customer.telephone} title="Telephone" />
-            <DataItem
-              text={format(new Date(customer.registration_time), 'yyyy-MM-dd')}
-              title="Customer since"
-            />
             <DataItem text={customer.Location.street1} title="Address" />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
@@ -75,7 +73,13 @@ const CustomerDetails: React.FC<ICustomerDetailsCardProps> = ({
           <Typography component="h2" variant="h5">
             Payment Methods
           </Typography>
-          <CustomButton color="primary" variant="contained">
+          <CustomButton
+            color="primary"
+            onClick={() =>
+              router.push(PATHS.ADD_PAYMENT_METHOD(customer.customerID))
+            }
+            variant="contained"
+          >
             Add Payment Method
           </CustomButton>
         </Box>
